@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_search_app/ui/home/home_view_model.dart';
 import 'package:flutter_local_search_app/ui/home/widgets/local_information.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
   void search(String text) {
     // TODO: 뷰모델 search함수 호출
     print("search");
@@ -11,6 +18,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeState homeState = ref.watch(homeViewModelProvider);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
