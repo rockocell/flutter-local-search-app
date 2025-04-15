@@ -25,4 +25,6 @@ class Local {
     'category': category,
     'roadAddress': roadAddress,
   };
+  // TODO: title에 줄바꿈 코드 있는 경우 대처
+  // TODO: List<String> 형태 변수 컨버트 fix
 }
