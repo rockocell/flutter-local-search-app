@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_search_app/data/model/local.dart';
 
 class LocalInformation extends StatelessWidget {
-  const LocalInformation({super.key});
+  Local local;
+  LocalInformation(this.local, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +20,13 @@ class LocalInformation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '삼성1동 주민센터',
+              local.title,
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 2),
-            Text('공공, 사회기관', style: TextStyle(fontSize: 12)),
+            Text(local.category.toString(), style: TextStyle(fontSize: 12)),
             SizedBox(height: 2),
-            Text(
-              '서울특별시 강남구 봉은사로 616 삼성1동 주민센터',
-              style: TextStyle(fontSize: 12),
-            ),
+            Text(local.roadAddress.toString(), style: TextStyle(fontSize: 12)),
           ],
         ),
       ),
