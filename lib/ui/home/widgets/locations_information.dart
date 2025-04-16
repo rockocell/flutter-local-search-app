@@ -33,7 +33,7 @@ class LocationInformation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                removeHtmlTags(location.title),
+                location.title,
 
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
