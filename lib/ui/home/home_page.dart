@@ -74,15 +74,26 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: Column(
             children: [
               Expanded(
-                child: ListView.separated(
-                  itemCount: homeState.locations?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    Location location = homeState.locations![index];
-                    return LocationInformation(location);
-                  },
-                  separatorBuilder: (context, index) => SizedBox(height: 10),
-                ),
-              ),
+                child:
+                    (homeState.locations == null)
+                        ? SizedBox()
+                        : (homeState.locations!.isEmpty)
+                        ? Center(
+                          child: Text(
+                            '검색 결과가 없습니다',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        )
+                        : ListView.separated(
+                          itemCount: homeState.locations!.length,
+                          itemBuilder: (context, index) {
+                            final location = homeState.locations![index];
+                            return LocationInformation(location);
+                          },
+                          separatorBuilder:
+                              (contex, index) => SizedBox(height: 10),
+                        ),
+              ), // 검색 전엔 빈 화면 표시, 검색 결과가 없으면 안내 문구 표시, 검색 결과가 있으면 Listview build
             ],
           ),
         ),

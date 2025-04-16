@@ -59,8 +59,9 @@ class HomeViewModel extends Notifier<HomeState> {
       }
 
       final raw = result[0]['text'];
-      final simplifiedAdress = simplifyAddress(raw);
-      await search(simplifiedAdress);
+      final addressQuery = simplifyAddress(raw);
+      print(addressQuery);
+      await search(addressQuery);
     } catch (e) {
       print(e);
     }
