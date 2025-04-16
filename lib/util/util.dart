@@ -5,14 +5,10 @@ String removeHtmlTags(String htmlText) {
 
 String simplifyAddress(String raw) {
   final parts = raw.split(' ');
-  if (parts.length >= 3) {
-    for (var part in parts) {
-      if (part.contains('동')) {
-        return part;
-      } // (ㅇㅇ도) ㅇㅇ시 ㅇㅇ구 ㅇㅇ동 ... 에서 'ㅇㅇ동' 사용
-    }
-    return raw;
-  } else {
-    return raw;
+  for (var part in parts) {
+    if (part.contains('동')) {
+      return part;
+    } // (ㅇㅇ도) ㅇㅇ시 ㅇㅇ구 ㅇㅇ동 ... 에서 'ㅇㅇ동' 사용
   }
+  return raw;
 }

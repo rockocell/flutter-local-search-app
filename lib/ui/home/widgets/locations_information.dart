@@ -10,6 +10,7 @@ class LocationInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(location.link);
         Navigator.push(
           context,
           MaterialPageRoute(
