@@ -1,17 +1,17 @@
-class Local {
+class Location {
   String title;
   String link;
   String category;
   String roadAddress;
 
-  Local({
+  Location({
     required this.title,
     required this.link,
     required this.category,
     required this.roadAddress,
   });
 
-  Local.fromJson(Map<String, dynamic> json)
+  Location.fromJson(Map<String, dynamic> json)
     : this(
         title: json['title'],
         link: json['link'],

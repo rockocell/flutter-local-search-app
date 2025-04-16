@@ -1,21 +1,21 @@
-import 'package:flutter_local_search_app/data/model/local.dart';
-import 'package:flutter_local_search_app/data/repository/local_repository.dart';
+import 'package:flutter_local_search_app/data/model/location.dart';
+import 'package:flutter_local_search_app/data/repository/location_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeState {
-  HomeState({required this.locals});
-  List<Local>? locals;
+  HomeState({required this.locations});
+  List<Location>? locations;
 }
 
 class HomeViewModel extends Notifier<HomeState> {
   @override
   HomeState build() {
-    return HomeState(locals: null);
+    return HomeState(locations: null);
   }
 
   Future<void> search(String query) async {
-    LocalRepository localRepository = LocalRepository();
-    state = HomeState(locals: await localRepository.search(query));
+    LocationRepository locationRepository = LocationRepository();
+    state = HomeState(locations: await locationRepository.search(query));
   }
 }
 

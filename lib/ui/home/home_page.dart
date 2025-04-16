@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_search_app/data/model/local.dart';
+import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/home/home_view_model.dart';
-import 'package:flutter_local_search_app/ui/home/widgets/local_information.dart';
+import 'package:flutter_local_search_app/ui/home/widgets/locations_information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -60,10 +60,10 @@ class _HomePageState extends ConsumerState<HomePage> {
             children: [
               Expanded(
                 child: ListView.builder(
-                  itemCount: homeState.locals?.length ?? 0,
+                  itemCount: homeState.locations?.length ?? 0,
                   itemBuilder: (context, index) {
-                    Local local = homeState.locals![index];
-                    return LocalInformation(local);
+                    Location location = homeState.locations![index];
+                    return LocationInformation(location);
                   },
                 ),
               ),

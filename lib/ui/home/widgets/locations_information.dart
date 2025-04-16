@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_search_app/data/model/local.dart';
+import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/detail/detail_page.dart';
 import 'package:flutter_local_search_app/util/util.dart';
 
-class LocalInformation extends StatelessWidget {
-  Local local;
-  LocalInformation(this.local, {super.key});
+class LocationInformation extends StatelessWidget {
+  Location location;
+  LocationInformation(this.location, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LocalInformation extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return DetailPage(local);
+              return DetailPage(location);
             },
           ),
         );
@@ -33,15 +33,18 @@ class LocalInformation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                removeHtmlTags(local.title),
+                removeHtmlTags(location.title),
 
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 2),
-              Text(local.category.toString(), style: TextStyle(fontSize: 12)),
+              Text(
+                location.category.toString(),
+                style: TextStyle(fontSize: 12),
+              ),
               SizedBox(height: 2),
               Text(
-                local.roadAddress.toString(),
+                location.roadAddress.toString(),
                 style: TextStyle(fontSize: 12),
               ),
             ],
