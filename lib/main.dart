@@ -3,6 +3,7 @@ import 'package:flutter_local_search_app/ui/home/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ProviderScope(child: MyApp()));
 }
 
