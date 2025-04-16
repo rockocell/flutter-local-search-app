@@ -13,6 +13,7 @@ class DetailPage extends StatelessWidget {
       body:
           location.link.isNotEmpty
               ? InAppWebView(
+                // location.link 있는 경우 해당 링크 연결
                 initialSettings: InAppWebViewSettings(
                   mediaPlaybackRequiresUserGesture: true,
                   javaScriptEnabled: true,
@@ -22,6 +23,7 @@ class DetailPage extends StatelessWidget {
                 initialUrlRequest: URLRequest(url: WebUri(location.link)),
               )
               : InAppWebView(
+                // location.link 없는 경우 location.title 네이버맵에서 검색한 url 연결
                 initialSettings: InAppWebViewSettings(
                   mediaPlaybackRequiresUserGesture: true,
                   javaScriptEnabled: true,
@@ -30,7 +32,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 initialUrlRequest: URLRequest(
                   url: WebUri(
-                    'https://m.map.naver.com/search2/search.naver?query=${Uri.encodeComponent(location.title)}',
+                    'https://m.map.naver.com/search2/search.naver?query=${location.title}',
                   ),
                 ),
               ),

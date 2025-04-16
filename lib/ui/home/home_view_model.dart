@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_search_app/data/get_current_location.dart';
 import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/data/repository/location_repository.dart';
@@ -22,10 +23,10 @@ class HomeViewModel extends Notifier<HomeState> {
     state = HomeState(locations: await locationRepository.search(query));
   }
 
-  Future<void> searchByCurrentLocation() async {
+  Future<void> searchByCurrentLocation(BuildContext context) async {
     try {
       Position pos = await getCurrentLocation();
-      print('${pos.latitude}, ${pos.longitude}'); // 기기 위도경도 확인
+      // dio로 vworld api에 위도경도 보내서 해당 위도경도의 주소 정보(parcel 타입) 받기
       final response = await Dio().get(
         'https://api.vworld.kr/req/address',
         queryParameters: {
@@ -40,15 +41,26 @@ class HomeViewModel extends Notifier<HomeState> {
       );
       final result = response.data['response']['result'];
       if (result == null || result.isEmpty) {
-        print('주소를 찾지 못했습니다. 좌표를 확인하세요.');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '주소를 찾지 못했습니다. 기기 좌표를 확인해 주세요.',
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            margin: EdgeInsets.only(left: 20, right: 20, bottom: 80),
+          ),
+        );
         return;
       }
 
       final raw = result[0]['text'];
       final simplifiedAdress = simplifyAddress(raw);
       await search(simplifiedAdress);
-      print(raw);
-      print(simplifiedAdress);
     } catch (e) {
       print(e);
     }

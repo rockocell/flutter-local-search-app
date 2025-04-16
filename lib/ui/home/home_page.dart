@@ -57,7 +57,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 onTap: () {
                   ref
                       .read(homeViewModelProvider.notifier)
-                      .searchByCurrentLocation();
+                      .searchByCurrentLocation(context);
                 },
                 child: Container(
                   width: 50,
