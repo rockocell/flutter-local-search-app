@@ -3,11 +3,16 @@ String removeHtmlTags(String htmlText) {
   return htmlText.replaceAll(regex, '');
 }
 
-String simplifyAddress(String rawAddress) {
-  final parts = rawAddress.split(' ');
+String simplifyAddress(String raw) {
+  final parts = raw.split(' ');
   if (parts.length >= 3) {
-    return '${parts[2]}';
+    for (var part in parts) {
+      if (part.contains('동')) {
+        return part;
+      } // (ㅇㅇ도) ㅇㅇ시 ㅇㅇ구 ㅇㅇ동 ... 에서 'ㅇㅇ동' 사용
+    }
+    return raw;
   } else {
-    return rawAddress;
+    return raw;
   }
 }

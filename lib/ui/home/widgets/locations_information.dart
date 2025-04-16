@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/detail/detail_page.dart';
-import 'package:flutter_local_search_app/util/util.dart';
 
 class LocationInformation extends StatelessWidget {
   Location location;

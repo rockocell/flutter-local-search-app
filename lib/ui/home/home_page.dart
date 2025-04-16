@@ -51,17 +51,20 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           actions: [
-            GestureDetector(
-              onTap: () {
-                ref
-                    .read(homeViewModelProvider.notifier)
-                    .searchByCurrentLocation();
-              },
-              child: Container(
-                width: 50,
-                height: 50,
-                color: Colors.white,
-                child: Icon(Icons.gps_fixed),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: GestureDetector(
+                onTap: () {
+                  ref
+                      .read(homeViewModelProvider.notifier)
+                      .searchByCurrentLocation();
+                },
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  color: Colors.transparent,
+                  child: Icon(Icons.gps_fixed),
+                ),
               ),
             ),
           ],
