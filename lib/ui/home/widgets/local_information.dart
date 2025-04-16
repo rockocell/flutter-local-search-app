@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_search_app/data/model/local.dart';
+import 'package:flutter_local_search_app/util/util.dart';
 
 class LocalInformation extends StatelessWidget {
   Local local;
@@ -20,7 +21,8 @@ class LocalInformation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              local.title,
+              removeHtmlTags(local.title),
+
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 2),
