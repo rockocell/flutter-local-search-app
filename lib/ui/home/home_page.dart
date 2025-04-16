@@ -25,34 +25,46 @@ class _HomePageState extends ConsumerState<HomePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: SizedBox(
-              height: 50,
-              child: TextField(
-                maxLines: 1,
-                autocorrect: false,
-                onSubmitted: search,
-                textInputAction: TextInputAction.search,
-                controller: textEditingController,
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  border: WidgetStateInputBorder.resolveWith((states) {
-                    if (states.contains(WidgetState.focused)) {
-                      return OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.black),
-                      );
-                    }
+          title: SizedBox(
+            height: 50,
+            child: TextField(
+              maxLines: 1,
+              autocorrect: false,
+              onSubmitted: search,
+              textInputAction: TextInputAction.search,
+              controller: textEditingController,
+              decoration: InputDecoration(
+                hintText: 'Search...',
+                border: WidgetStateInputBorder.resolveWith((states) {
+                  if (states.contains(WidgetState.focused)) {
                     return OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Colors.black),
                     );
-                  }),
-                ),
+                  }
+                  return OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: Colors.grey),
+                  );
+                }),
               ),
             ),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                ref
+                    .read(homeViewModelProvider.notifier)
+                    .searchByCurrentLocation();
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.white,
+                child: Icon(Icons.gps_fixed),
+              ),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
