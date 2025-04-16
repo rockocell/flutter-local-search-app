@@ -74,12 +74,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
                   itemCount: homeState.locations?.length ?? 0,
                   itemBuilder: (context, index) {
                     Location location = homeState.locations![index];
                     return LocationInformation(location);
                   },
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
                 ),
               ),
             ],
