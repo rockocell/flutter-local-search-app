@@ -1,32 +1,29 @@
-import 'dart:convert';
-
 import 'package:flutter_local_search_app/data/model/location.dart';
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
 class LocationRepository {
-  Future<List<Location>?> search(String query) async {
-    try {
-      Client client = Client();
-      Response result = await client.get(
-        Uri.parse(
-          'https://openapi.naver.com/v1/search/local.json?query=$query&display=5',
-        ),
-        headers: {
-          'X-Naver-Client-Id': 'iu2OsbtANrPdWlxKwFzI',
-          'X-Naver-Client-Secret': 'zdPq0tUzMR',
-        },
-      );
-      final json = jsonDecode(result.body);
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://openapi.naver.com/v1/search/',
+      headers: {
+        'X-Naver-Client-Id': 'iu2OsbtANrPdWlxKwFzI',
+        'X-Naver-Client-Secret': 'zdPq0tUzMR',
+      },
+    ),
+  );
 
-      if (result.statusCode == 200) {
-        return List.from(
-          json['items'],
-        ).map((e) => Location.fromJson(e)).toList();
-      }
-      return null;
+  Future<List<Location>> search(String query) async {
+    try {
+      final response = await dio.get(
+        'local.json',
+        queryParameters: {'query': query, 'display': 5},
+      );
+
+      final items = response.data['items'] as List;
+      return items.map((item) => Location.fromJson(item)).toList();
     } catch (e) {
       print(e);
-      return null;
+      return [];
     }
   }
 }
