@@ -1,8 +1,8 @@
 class Local {
   String title;
   String link;
-  List<String> category;
-  List<String> roadAddress;
+  String category;
+  String roadAddress;
 
   Local({
     required this.title,
@@ -15,8 +15,8 @@ class Local {
     : this(
         title: json['title'],
         link: json['link'],
-        category: ['category'],
-        roadAddress: ['roadAddress'],
+        category: json['category'],
+        roadAddress: json['roadAddress'],
       );
 
   Map<String, dynamic> toJson() => {
