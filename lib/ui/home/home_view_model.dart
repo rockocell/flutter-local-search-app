@@ -13,6 +13,8 @@ class HomeState {
 }
 
 class HomeViewModel extends Notifier<HomeState> {
+  final Dio _client = Dio(BaseOptions(validateStatus: (status) => true));
+
   @override
   HomeState build() {
     return HomeState(locations: null);
@@ -23,45 +25,31 @@ class HomeViewModel extends Notifier<HomeState> {
     state = HomeState(locations: await locationRepository.search(query));
   }
 
-  Future<void> searchByCurrentLocation(BuildContext context) async {
+  Future<void> searchByCurrentLocation(double lat, double lng) async {
     try {
-      Position pos = await getCurrentLocation();
-      // dio로 vworld api에 위도경도 보내서 해당 위도경도의 주소 정보(parcel 타입) 받기
-      final response = await Dio().get(
-        'https://api.vworld.kr/req/address',
+      final response = await _client.get(
+        'https://api.vworld.kr/req/data',
         queryParameters: {
-          'service': 'address',
-          'request': 'getAddress',
-          'crs': 'EPSG:4326',
-          'point': '${pos.longitude},${pos.latitude}',
-          'format': 'json',
-          'type': 'parcel',
+          'request': 'GetFeature',
           'key': 'A512983A-58CD-3367-B1B4-274DC84CB342',
+          'data': 'LT_C_ADEMD_INFO',
+          'geomFilter': 'POINT($lng $lat)',
+          'geometry': false,
+          'size': 5,
         },
       );
-      final result = response.data['response']['result'];
-      if (result == null || result.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '주소를 찾지 못했습니다. 기기 좌표를 확인해 주세요.',
-              textAlign: TextAlign.center,
-            ),
-            duration: Duration(seconds: 2),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            margin: EdgeInsets.only(left: 20, right: 20, bottom: 80),
-          ),
-        );
-        return;
+      if (response.statusCode == 200 &&
+          response.data['response']['status'] == 'OK') {
+        final features =
+            response
+                .data['response']['result']['featureCollection']['features'];
+        final featureList = List.from(features);
+        final iterable = featureList.map((feature) {
+          return '${feature['properties']['full_nm']}';
+        });
+        final String query = iterable.first;
+        search(query);
       }
-
-      final raw = result[0]['text'];
-      final addressQuery = simplifyAddress(raw);
-      print(addressQuery);
-      await search(addressQuery);
     } catch (e) {
       print(e);
     }

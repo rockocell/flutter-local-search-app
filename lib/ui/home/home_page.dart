@@ -3,6 +3,7 @@ import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/home/home_view_model.dart';
 import 'package:flutter_local_search_app/ui/home/widgets/locations_information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   @override
@@ -54,10 +55,14 @@ class _HomePageState extends ConsumerState<HomePage> {
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  final position = await Geolocator.getCurrentPosition();
                   ref
                       .read(homeViewModelProvider.notifier)
-                      .searchByCurrentLocation(context);
+                      .searchByCurrentLocation(
+                        position.latitude,
+                        position.longitude,
+                      );
                 },
                 child: Container(
                   width: 50,
