@@ -1,11 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_search_app/data/get_current_location.dart';
 import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/data/repository/location_repository.dart';
-import 'package:flutter_local_search_app/util/util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeState {
   HomeState({required this.locations});

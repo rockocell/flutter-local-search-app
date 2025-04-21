@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_search_app/data/get_current_location.dart';
-import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/home/home_view_model.dart';
 import 'package:flutter_local_search_app/ui/home/widgets/locations_information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   @override
