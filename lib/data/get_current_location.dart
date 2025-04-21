@@ -8,7 +8,7 @@ Future<Position> getCurrentLocation() async {
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      throw Exception('위치 권한이 거부되었습니다');
+      throw Exception('위치 권한 접근 불가');
     }
   }
 
@@ -18,7 +18,7 @@ Future<Position> getCurrentLocation() async {
   if (!isLocationServiceEnabled) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      throw Exception('위치 권한이 거부되었습니다');
+      throw Exception('위치 권한 접근 불가');
     }
   }
 

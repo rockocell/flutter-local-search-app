@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_search_app/data/get_current_location.dart';
 import 'package:flutter_local_search_app/data/model/location.dart';
 import 'package:flutter_local_search_app/ui/home/home_view_model.dart';
 import 'package:flutter_local_search_app/ui/home/widgets/locations_information.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               padding: const EdgeInsets.only(right: 20),
               child: GestureDetector(
                 onTap: () async {
-                  final position = await Geolocator.getCurrentPosition();
+                  final position = await getCurrentLocation();
                   ref
                       .read(homeViewModelProvider.notifier)
                       .searchByCurrentLocation(

@@ -11,7 +11,7 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(location.title)),
       body:
-          location.link.isNotEmpty
+          (location.link.isNotEmpty && location.link.startsWith('https://'))
               ? InAppWebView(
                 // location.link 있는 경우 해당 링크 연결
                 initialSettings: InAppWebViewSettings(
