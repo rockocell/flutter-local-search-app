@@ -7,8 +7,8 @@
 <div style="display: flex; overflow-x: auto; border: 2px solid #ccc; padding: 6px; border-radius: 8px;">  
   <img src="assets/home_page_no_list.png" width="240" style="margin-right: 5px;" /> 
   <img src="assets/home_page_list.png" width="240" style="margin-right: 5px;" />  
-  <img src="assets/datial_page_own_website.png" width="240" style="margin-right: 5px;" />  
-  <img src="assets/detail_page_naver_map.png.png" width="240" />  
+  <img src="assets/datail_page_own_website.png" width="240" style="margin-right: 5px;" />  
+  <img src="assets/detail_page_naver_map.png" width="240" />  
   </div>
 
 ## 주요 기능
